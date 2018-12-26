@@ -1503,7 +1503,9 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 				String value = gridTab.getValue("Value").toString();
 				parentID = PO.retrieveIdOfParentValue(value, getTableName(), Env.getAD_Client_ID(Env.getCtx()), null);
 				parentNode = model.find(treeNode, parentID);
-				name = value + " - " + name;
+				if (isValueDisplayed()) {
+					name = value + " - " + name;
+				}
 			}
 			MTreeNode node = new MTreeNode (gridTab.getRecord_ID(), 0, name, description,
 					parentID, summary, imageIndicator, false, null);
@@ -1548,7 +1550,7 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 				}
 
 				boolean changed = false;
-				if (isTreeDrivenByValue()) {
+				if (isValueDisplayed()) {
 					String value = (String) gridTab.getValue("Value");
 					String name = (String) gridTab.getValue("Name");
 					String full = value + " - " + name;
@@ -1880,6 +1882,13 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 		SimpleTreeModel model = (SimpleTreeModel)(TreeModel<?>) treePanel.getTree().getModel();
 		boolean retValue = false;
 		retValue = model.isTreeDrivenByValue();
+		return retValue;
+	}
+
+	private boolean isValueDisplayed() {
+		SimpleTreeModel model = (SimpleTreeModel)(TreeModel<?>) treePanel.getTree().getModel();
+		boolean retValue = false;
+		retValue = model.isValueDisplayed();
 		return retValue;
 	}
 
