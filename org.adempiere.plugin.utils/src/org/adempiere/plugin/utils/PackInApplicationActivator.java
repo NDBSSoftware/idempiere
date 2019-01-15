@@ -170,7 +170,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 					if (!packIn(zipFile)) {
 						// stop processing further packages if one fail
 						String msg = "Failed application of " + zipFile;
-						addLog(Level.SEVERE, msg);
+						addLog(Level.WARNING, msg);
 						if (getProcessInfo() != null) {
 							getProcessInfo().setError(true);
 							getProcessInfo().setSummary("@Error@: " + msg);
@@ -181,12 +181,12 @@ public class PackInApplicationActivator extends AbstractActivator {
 					filesToProcess.remove(zipFile);
 				}
 			} else {
-				addLog(Level.SEVERE, "Could not acquire the DB lock to automatically install the packins");
+				addLog(Level.WARNING, "Could not acquire the DB lock to automatically install the packins");
 				return;
 			}
 		} catch (AdempiereSystemError e) {
 			e.printStackTrace();
-			addLog(Level.SEVERE, e.getLocalizedMessage());
+			addLog(Level.WARNING, e.getLocalizedMessage());
 		} finally {
 			releaseLock();
 		}
@@ -219,7 +219,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 					seedClientValue = clientValue.split("-")[2];
 					seedClientIDs = getClientIDs(seedClientValue);				
 					if (seedClientIDs.length == 0) {
-						logger.log(Level.SEVERE, "Seed client does not exist: " + seedClientValue);
+						logger.log(Level.WARNING, "Seed client does not exist: " + seedClientValue);
 						return false;
 					}
 				}
@@ -241,7 +241,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 			} else {
 				clientIDs = getClientIDs(clientValue);
 				if (clientIDs.length == 0) {
-					logger.log(Level.SEVERE, "Client does not exist: " + clientValue);
+					logger.log(Level.WARNING, "Client does not exist: " + clientValue);
 					return false;
 				}
 			}
@@ -265,7 +265,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 						}
 					}
 				} catch (Throwable e) {
-					logger.log(Level.SEVERE, "Pack in failed.", e);
+					logger.log(Level.WARNING, "Pack in failed.", e);
 					return false;
 				} finally {
 					Env.setContext(Env.getCtx(), "#AD_Client_ID", 0);
@@ -306,7 +306,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 		for (String filePath : filePaths) {
 			File toProcess = new File(filePath.trim());
 			if (!toProcess.exists()) {
-				addLog(Level.SEVERE, filePath + " does not exist");
+				addLog(Level.WARNING, filePath + " does not exist");
 				continue;
 			}
 			
@@ -333,7 +333,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 			if (toProcess.getName().toLowerCase().endsWith(".zip"))
 				filesToProcess.add(toProcess);
 			else {
-				logger.log(Level.SEVERE, toProcess.getName() + " is not a valid .zip file");
+				logger.log(Level.WARNING, toProcess.getName() + " is not a valid .zip file");
 				return;
 			}
 		} else if (toProcess.isDirectory() && toProcess.canRead()) {
@@ -357,7 +357,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 					if (fileToProcess.canRead()) {
 						filesToProcess.add(fileToProcess);
 					} else {
-						addLog(Level.SEVERE, fileToProcess.getName() + " not readable");
+						addLog(Level.WARNING, fileToProcess.getName() + " not readable");
 					}
 				}
 			}
@@ -366,7 +366,7 @@ public class PackInApplicationActivator extends AbstractActivator {
 				return;
 			}
 		} else {
-			addLog(Level.SEVERE, toProcess.getName() + " not a file or folder or not readable");
+			addLog(Level.WARNING, toProcess.getName() + " not a file or folder or not readable");
 		}
 	}
 	

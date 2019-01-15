@@ -113,6 +113,7 @@ public class PipoDictionaryService implements IDictionaryService {
 			Trx.get(trxName, false).rollback();
 			adPackageImp.setP_Msg(e.getLocalizedMessage());
 			packIn.getNotifier().addFailureLine(e.getLocalizedMessage());
+			packIn.setSuccess(false);
 			logger.log(Level.SEVERE, "importXML:", e);
 			throw e;
 		} finally {
