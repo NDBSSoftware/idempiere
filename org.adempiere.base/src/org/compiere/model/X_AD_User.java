@@ -24,14 +24,14 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for AD_User
  *  @author iDempiere (generated) 
- *  @version Release 5.1 - $Id$ */
+ *  @version Release 6.2 - $Id$ */
 public class X_AD_User extends PO implements I_AD_User, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20171031L;
+	private static final long serialVersionUID = 20190321L;
 
     /** Standard Constructor */
     public X_AD_User (Properties ctx, int AD_User_ID, String trxName)
@@ -55,6 +55,8 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 			setIsNoPasswordReset (false);
 // 'N'
 			setIsSalesLead (false);
+// N
+			setIsSupportUser (false);
 // N
 			setName (null);
 			setNotificationType (null);
@@ -783,6 +785,27 @@ public class X_AD_User extends PO implements I_AD_User, I_Persistent
 	public boolean isSalesLead () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsSalesLead);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set Support User.
+		@param IsSupportUser Support User	  */
+	public void setIsSupportUser (boolean IsSupportUser)
+	{
+		set_Value (COLUMNNAME_IsSupportUser, Boolean.valueOf(IsSupportUser));
+	}
+
+	/** Get Support User.
+		@return Support User	  */
+	public boolean isSupportUser () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsSupportUser);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 
