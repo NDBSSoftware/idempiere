@@ -23,6 +23,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import org.adempiere.util.IProcessUI;
 import org.compiere.model.PO;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
@@ -43,7 +44,7 @@ public class ProcessInfo implements Serializable
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2167823616151648814L;
+	private static final long serialVersionUID = -4600747909096993053L;
 
 	/**
 	 *  Constructor
@@ -197,6 +198,8 @@ public class ProcessInfo implements Serializable
 			sb.append(",Transient=").append(m_TransientObject);
 		if (m_SerializableObject != null)
 			sb.append(",Serializable=").append(m_SerializableObject);
+		if (m_transactionName != null)
+			sb.append(",Trx=").append(m_transactionName);
 		sb.append(",Summary=").append(getSummary())
 			.append(",Log=").append(m_logs == null ? 0 : m_logs.size());
 		//	.append(getLogInfo(false));
@@ -858,6 +861,16 @@ public class ProcessInfo implements Serializable
 
 	public void setPDFFileName(String fileName) {
 		this.m_PDFfileName = fileName;
+	}
+
+	private IProcessUI processUI;
+
+	public void setProcessUI(IProcessUI processUI) {
+		this.processUI = processUI;
+	}
+	
+	public IProcessUI getProcessUI() {
+		return processUI;
 	}
 
 }   //  ProcessInfo
