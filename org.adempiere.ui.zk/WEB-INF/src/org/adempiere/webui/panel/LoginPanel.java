@@ -100,7 +100,9 @@ public class LoginPanel extends Window implements EventListener<Event>
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3361823499124119753L;
+	private static final long serialVersionUID = -6130436148212949636L;
+
+	public static final String ROLE_TYPES_WEBUI = "NULL,ZK,SS";  //webui,support+null
 
 	private static LogAuthFailure logAuthFailure = new LogAuthFailure();
 
@@ -570,7 +572,7 @@ public class LoginPanel extends Window implements EventListener<Event>
 
         Session currSess = Executions.getCurrent().getDesktop().getSession();
         
-        KeyNamePair clientsKNPairs[] = login.getClients(userId, userPassword);
+        KeyNamePair clientsKNPairs[] = login.getClients(userId, userPassword, ROLE_TYPES_WEBUI);
         
         if (clientsKNPairs == null || clientsKNPairs.length == 0)
         {

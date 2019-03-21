@@ -64,6 +64,7 @@ import org.idempiere.webservices.fault.IdempiereServiceFault;
  */
 public class AbstractService {
 
+	public static final String ROLE_TYPES_WEBSERVICE = "NULL,WS";  //webservice+null
 	private static final String ROLE_ACCESS_SQL = "SELECT IsActive FROM WS_WebServiceTypeAccess WHERE AD_Role_ID=? "
 	        + "AND WS_WebServiceType_ID=?";
 	private static final String COMPIERE_SERVICE = "CompiereService";
@@ -105,7 +106,7 @@ public class AbstractService {
 			return ret;
 		
 		Login login = new Login(m_cs.getCtx());
-		KeyNamePair[] clients = login.getClients(loginRequest.getUser(), loginRequest.getPass());
+		KeyNamePair[] clients = login.getClients(loginRequest.getUser(), loginRequest.getPass(), ROLE_TYPES_WEBSERVICE);
 		if (clients == null)
 			return "Error login - User invalid";
 		m_cs.setPassword(loginRequest.getPass());
@@ -135,7 +136,7 @@ public class AbstractService {
     		Env.setContext(m_cs.getCtx(), "#UserAgent",   userAgent == null ? "Unknown" : userAgent);
     	}
 
-		KeyNamePair[] roles = login.getRoles(loginRequest.getUser(), selectedClient);
+		KeyNamePair[] roles = login.getRoles(loginRequest.getUser(), selectedClient, ROLE_TYPES_WEBSERVICE);
 		if (roles != null) {
 			boolean okrole = false;
 			for (KeyNamePair role : roles) {
