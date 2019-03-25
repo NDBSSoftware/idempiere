@@ -221,7 +221,6 @@ public class MUser extends X_AD_User
 			
 			
 			if (system.isLDAP() && ! Util.isEmpty(user.getLDAPUser())) {
-				System.out.println("validating with LDAP");
 				valid = system.isLDAP(name, password);
 			} else if (hash_password) {
 				valid = user.authenticateHash(password);
