@@ -7,7 +7,7 @@ INSERT INTO AD_Element (AD_Element_ID,AD_Client_ID,AD_Org_ID,IsActive,Created,Cr
 ;
 
 -- Mar 21, 2019, 5:27:36 PM BRT
-INSERT INTO AD_Column (AD_Column_ID,Version,Name,AD_Table_ID,ColumnName,DefaultValue,FieldLength,IsKey,IsParent,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsEncrypted,AD_Reference_ID,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,AD_Element_ID,IsUpdateable,IsSelectionColumn,EntityType,IsSyncDatabase,IsAlwaysUpdateable,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsAllowCopy,SeqNoSelection,IsToolbarButton,IsSecure,IsHtml) VALUES (213857,0,'Support User',114,'IsSupportUser','N',1,'N','N','Y','N','N',0,'N',20,0,0,'Y',TO_DATE('2019-03-21 17:27:36','YYYY-MM-DD HH24:MI:SS'),100,TO_DATE('2019-03-21 17:27:36','YYYY-MM-DD HH24:MI:SS'),100,203304,'Y','N','D','N','N','N','Y','fe4fbe00-ff30-4810-bc60-9608ac6fc885','Y',0,'N','N','N')
+INSERT INTO AD_Column (AD_Column_ID,Version,Name,AD_Table_ID,ColumnName,DefaultValue,FieldLength,IsKey,IsParent,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsEncrypted,AD_Reference_ID,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,AD_Element_ID,IsUpdateable,IsSelectionColumn,EntityType,IsSyncDatabase,IsAlwaysUpdateable,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsAllowCopy,SeqNoSelection,IsToolbarButton,IsSecure) VALUES (213857,0,'Support User',114,'IsSupportUser','N',1,'N','N','Y','N','N',0,'N',20,0,0,'Y',TO_DATE('2019-03-21 17:27:36','YYYY-MM-DD HH24:MI:SS'),100,TO_DATE('2019-03-21 17:27:36','YYYY-MM-DD HH24:MI:SS'),100,203304,'Y','N','D','N','N','N','Y','fe4fbe00-ff30-4810-bc60-9608ac6fc885','Y',0,'N','N')
 ;
 
 -- Mar 21, 2019, 5:27:38 PM BRT
