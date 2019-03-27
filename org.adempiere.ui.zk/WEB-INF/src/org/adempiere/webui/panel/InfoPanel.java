@@ -1975,7 +1975,7 @@ public abstract class InfoPanel extends Window implements EventListener<Event>, 
 						isRequeryByRunSuccessProcess = true;
 						Clients.response(new AuEcho(InfoPanel.this, "onQueryCallback", null));
 					}
-					
+					recordSelectedData.clear();
 				}
 				
 		//HengSin -- end --
