@@ -54,3 +54,4 @@ REALIZEDLOSS,Realized loss,Difference between invoice and payment currency,Expen
 CURRENCYBALANCING,Currency balancing,Rounding difference to make journal balance in accounting currency,Expense,,Yes,No,CURRENCYBALANCING_ACCT,DEFAULTS_NOT_CONFIGURED
 COMMITMENTOFFSET,PO Commitment,PO Commitment,Memo,,Yes,No,COMMITMENTOFFSET_ACCT,DEFAULTS_NOT_CONFIGURED
 COMMITMENTOFFSETSALES,SO Commitment,SO Commitment,Memo,,Yes,No,COMMITMENTOFFSETSALES_ACCT,DEFAULTS_NOT_CONFIGURED
+LBR_P_REVENUERETURN,LBR Revenue Return,LBR Revenue Return,Memo,,Yes,No,LBR_P_REVENUERETURN_ACCT,DEFAULTS_NOT_CONFIGURED
