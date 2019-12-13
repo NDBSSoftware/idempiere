@@ -96,3 +96,6 @@ RemoteSystemsTempFiles
 fitnesse/FitNesseRoot/FitLibraryWeb/*.zip
 
 org.idempiere.javadoc/API
+
+*/bin/
+*/*.jar
