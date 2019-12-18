@@ -655,7 +655,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	}
 
 	private void initFirstTabpanel() {
-		adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, MRole.getDefault().getMaxQueryRecords());
+		adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, adTabbox.getSelectedGridTab().getMaxQueryRecords());
 		adTabbox.getSelectedTabpanel().activate(true);
 		Events.echoEvent(new Event(ADTabpanel.ON_POST_INIT_EVENT, adTabbox.getSelectedTabpanel()));
 	}
@@ -702,7 +702,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
             // Does not consider security
             int no = DB.getSQLValue(null, sql.toString());
             //
-            require = MRole.getDefault().isQueryRequire(no);
+            require = mTab.isQueryRequire(no);
         }
         // Show Query
         if (require)
@@ -2054,7 +2054,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 				        {
 				            m_onlyCurrentRows = false;          //  search history too
 				            adTabbox.getSelectedGridTab().setQuery(query);
-				            adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, MRole.getDefault().getMaxQueryRecords());   //  autoSize
+				            adTabbox.getSelectedTabpanel().query(m_onlyCurrentRows, m_onlyCurrentDays, adTabbox.getSelectedGridTab().getMaxQueryRecords());   //  autoSize
 				        }
 
 				        if (findWindow.isCreateNew())
