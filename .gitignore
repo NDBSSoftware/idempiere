@@ -27,3 +27,4 @@ External Plug-in Libraries
 
 /fitnesse/fitnesse.jar
 /fitnesse/FitNesseRoot/FitLibraryWeb/*.zip
+/runtime-*.app/
