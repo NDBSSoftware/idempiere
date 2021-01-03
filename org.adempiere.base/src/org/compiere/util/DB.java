@@ -219,7 +219,11 @@ public final class DB
 		String mailUser = env.getProperty("ADEMPIERE_MAIL_USER");
 		if (mailUser == null || mailUser.length() == 0)
 			return;
-		String mailPassword = env.getProperty("ADEMPIERE_MAIL_PASSWORD");
+		String mailPassword;
+		if (!env.containsKey("ADEMPIERE_MAIL_PASSWORD") && MSystem.isSecureProps())
+			mailPassword = Ini.getVar("ADEMPIERE_MAIL_PASSWORD");
+		else
+			mailPassword = env.getProperty("ADEMPIERE_MAIL_PASSWORD");
 	//	if (mailPassword == null || mailPassword.length() == 0)
 	//		return;
 		//
@@ -240,13 +244,11 @@ public final class DB
 		no = DB.executeUpdate(sql.toString(), null);
 		if (log.isLoggable(Level.FINE)) log.fine("User #"+no);
 		//
-		try
+		try (FileOutputStream out = new FileOutputStream(envFile))
 		{
 			env.setProperty("ADEMPIERE_MAIL_UPDATED", "Y");
-			FileOutputStream out = new FileOutputStream(envFile);
 			env.store(out, "");
 			out.flush();
-			out.close();
 		}
 		catch (Exception e)
 		{
