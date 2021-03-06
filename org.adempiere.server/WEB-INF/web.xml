@@ -66,6 +66,14 @@
 		<servlet-name>JnlpDownloadServlet</servlet-name>
 		<url-pattern>*.jnlp</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>OAuthCodeCallbackHandlerServlet</servlet-name>
+		<servlet-class>org.idempiere.web.OAuthCodeCallbackHandlerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OAuthCodeCallbackHandlerServlet</servlet-name>
+		<url-pattern>/oauth2/callback</url-pattern>
+	</servlet-mapping>
 	<!-- <servlet-mapping>
 		<servlet-name>StatusInfo</servlet-name>
 		<url-pattern>/statusInfo</url-pattern>

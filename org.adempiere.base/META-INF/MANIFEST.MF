@@ -8,7 +8,15 @@ Bundle-ClassPath: .,
  lib/commons-validator.jar,
  lib/cron4j.jar,
  lib/jnlp.jar,
- lib/avalon-framework-api.jar
+ lib/avalon-framework-api.jar,
+ lib/google-http-client.jar,
+ lib/google-http-client-gson.jar,
+ lib/google-oauth-client.jar,
+ lib/grpc-context.jar,
+ lib/httpclient.jar,
+ lib/httpcore.jar,
+ lib/opencensus-api.jar,
+ lib/opencensus-contrib-http-util.jar
 Export-Package: bsh,
  bsh.classpath,
  bsh.collection,
@@ -127,6 +135,8 @@ Require-Bundle: org.eclipse.equinox.app;bundle-version="0.0.0",
  groovy,
  org.apache.poi.poi;bundle-version="3.15.0",
  org.apache.poi.poi-ooxml;bundle-version="3.15.0",
- com.sun.activation.jakarta.activation;bundle-version="1.2.1"
+ com.sun.activation.jakarta.activation;bundle-version="1.2.1",
+ com.google.guava;bundle-version="21.0.0",
+ com.google.gson;bundle-version="2.8.2"
 Automatic-Module-Name: org.adempiere.base
 Bundle-Vendor: iDempiere Community

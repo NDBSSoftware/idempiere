@@ -31,6 +31,7 @@ import java.util.logging.Level;
 
 import javax.mail.internet.InternetAddress;
 
+import org.adempiere.exceptions.AdempiereException;
 import org.compiere.db.CConnection;
 import org.compiere.util.CCache;
 import org.compiere.util.CLogger;
@@ -507,8 +508,7 @@ public class MClient extends X_AD_Client
 		}
 		catch (Exception ex)
 		{
-			log.severe(getName() + " - " + ex.getLocalizedMessage());
-			return ex.getLocalizedMessage();
+			throw new AdempiereException(ex);
 		}
 	}	//	testEMail
 

@@ -23,6 +23,7 @@ import org.compiere.model.MClient;
 import org.compiere.model.MStore;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
+import org.compiere.util.Util;
 
 /**
  *	Client EMail Test
@@ -67,9 +68,9 @@ public class EMailTest extends SvrProcess
 				documentDir = ".";
 			File file = new File (documentDir);
 			if (file.exists() && file.isDirectory())
-				addLog(0, null, null, "Found Directory: " + client.getDocumentDir());
+				addLog(0, null, null, "Found Directory: " + documentDir);
 			else
-				addLog(0, null, null, "Not Found Directory: " + client.getDocumentDir());
+				addLog(0, null, null, "Not Found Directory: " + documentDir);
 		}
 
 		MStore[] wstores = MStore.getOfClient(client);
@@ -81,7 +82,7 @@ public class EMailTest extends SvrProcess
 			addLog(0, null, null, msglog.toString());
 		}
 		
-		return clientTest;
+		return Util.isEmpty(clientTest) ? "OK" : ("@Error@ " + clientTest);
 	}	//	doIt
 	
 }	//	EMailTest
