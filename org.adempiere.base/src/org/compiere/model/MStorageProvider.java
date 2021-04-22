@@ -22,13 +22,35 @@ import java.util.Properties;
 import org.adempiere.base.Service;
 import org.adempiere.base.ServiceQuery;
 import org.adempiere.exceptions.AdempiereException;
+import org.compiere.util.CCache;
 import org.compiere.util.DB;
 
 public class MStorageProvider extends X_AD_StorageProvider {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6030898744999167572L;
+	private static final long serialVersionUID = -7444967391781941193L;
+
+	/**	Cache							*/
+	static private CCache<Integer,MStorageProvider> s_cache = new CCache<Integer,MStorageProvider>(Table_Name, 10);
+
+	/**
+	 * 	Get Storage Provider (cached)
+	 *	@param ctx context
+	 *	@param AD_StorageProvider_ID id
+	 *	@return Storage Provider
+	 */
+	public static MStorageProvider get (Properties ctx, int AD_StorageProvider_ID)
+	{
+		Integer key = Integer.valueOf(AD_StorageProvider_ID);
+		MStorageProvider retValue = (MStorageProvider)s_cache.get(key);
+		if (retValue == null)
+		{
+			retValue = new MStorageProvider (ctx, AD_StorageProvider_ID, null);
+			s_cache.put(key, retValue);
+		}
+		return retValue;
+	}	//	get
 
 	public MStorageProvider(Properties ctx, int AD_StorageProvider_ID, String trxName) {
 		super(ctx, AD_StorageProvider_ID, trxName);

@@ -339,8 +339,12 @@ public class MImage extends X_AD_Image
 	 * @param trxName
 	 */
 	private void initImageStoreDetails(Properties ctx, String trxName) {
-		MClientInfo clientInfo = MClientInfo.get(ctx, getAD_Client_ID());
-		provider=new MStorageProvider(ctx, clientInfo.getStorageImage_ID(), trxName);		
+		if (is_new()) {
+			MClientInfo clientInfo = MClientInfo.get(ctx, getAD_Client_ID());
+			setStorageProvider(MStorageProvider.get(ctx, clientInfo.getStorageImage_ID()));
+		} else {
+			setStorageProvider(MStorageProvider.get(ctx, getAD_StorageProvider_ID()));
+		}
 	}
 	
 	/**
@@ -350,6 +354,7 @@ public class MImage extends X_AD_Image
 	 */
 	public void setStorageProvider(MStorageProvider p) {
 		provider = p;
+		setAD_StorageProvider_ID(p.getAD_StorageProvider_ID());
 	}
 	
 	public byte[] getByteData(){
