@@ -49,7 +49,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>OAuthCodeCallbackHandlerServlet</servlet-name>
-		<url-pattern>/oauth2/callback</url-pattern>
+		<url-pattern>/oauth/callback</url-pattern>
 	</servlet-mapping>
 	<!-- <servlet-mapping>
 		<servlet-name>StatusInfo</servlet-name>
