@@ -253,8 +253,8 @@ public class ReportStarter implements ProcessCall, ClientProcess
 
     		String[] tmps = reportLocation.split("/");
     		String cleanFile = tmps[tmps.length-1];
-    		String localFile = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + cleanFile;
-    		String downloadedLocalFile = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator")+"TMP" + cleanFile;
+    		String localFile = getLocalDownloadFolder() + cleanFile;
+    		String downloadedLocalFile = getLocalDownloadFolder() + "TMP_" + cleanFile;
 
     		reportFile = new File(localFile);
     		if (reportFile.exists())
@@ -1183,7 +1183,7 @@ public class ReportStarter implements ProcessCall, ClientProcess
 			log.info("getting resource from = " + getClass().getClassLoader().getResource(name));
 		}
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(name);
-		String localFile = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + localName;
+		String localFile = getLocalDownloadFolder() + localName;
 		if (log.isLoggable(Level.INFO)) log.info("localFile = " + localFile);
 		reportFile = new File(localFile);
 
@@ -1246,8 +1246,8 @@ public class ReportStarter implements ProcessCall, ClientProcess
 	 * @return File
 	 */
 	private File getAttachmentEntryFile(MAttachmentEntry entry) {
-		String localFile = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + entry.getName();
-		String downloadedLocalFile = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator")+"TMP" + entry.getName();
+		String localFile = getLocalDownloadFolder() + entry.getName();
+		String downloadedLocalFile = getLocalDownloadFolder()+"TMP_" + entry.getName();
 		File reportFile = new File(localFile);
 		if (reportFile.exists()) {
 			String localMD5hash = DigestOfFile.getMD5Hash(reportFile);
@@ -1274,6 +1274,19 @@ public class ReportStarter implements ProcessCall, ClientProcess
 		return reportFile;
 	}
 
+	private String getLocalDownloadFolder() {
+		String path = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") 
+			+ "jasperreport_"+processInfo.getAD_Process_ID() + System.getProperty("file.separator");
+		Path p = Path.of(path);
+		try {
+			if (!Files.exists(p))
+				Files.createDirectory(p);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}		
+		return path;
+	}
+	
 	/**
 	 * Update AD_PInstance result and error message
      * @author rlemeill
@@ -1465,43 +1478,11 @@ public class ReportStarter implements ProcessCall, ClientProcess
      */
     public ReportData getReportData (ProcessInfo pi, String trxName)
     {
-    	log.info("");
-        String sql = "SELECT pr.JasperReport, pr.IsDirectPrint "
-        		   + "FROM AD_Process pr, AD_PInstance pi "
-                   + "WHERE pr.AD_Process_ID = pi.AD_Process_ID "
-                   + " AND pi.AD_PInstance_ID=?";
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try
-        {
-            pstmt = DB.prepareStatement(sql, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY, trxName);
-            pstmt.setInt(1, pi.getAD_PInstance_ID());
-            rs = pstmt.executeQuery();
-            String path = null;
-            boolean	directPrint = false;
-            boolean isPrintPreview = pi.isPrintPreview();
-            if (rs.next()) {
-                path = rs.getString(1);
-
-				if ("Y".equalsIgnoreCase(rs.getString(2)) && !Ini.isPropertyBool(Ini.P_PRINTPREVIEW)
-						&& !isPrintPreview )
-					directPrint = true;
-            } else {
-                log.severe("data not found; sql = "+sql);
-				return null;
-            }
-
-            return new ReportData( path, directPrint);
-        }
-        catch (SQLException e)
-        {
-        	throw new DBException(e, sql);
-        }
-        finally
-        {
-            DB.close(rs, pstmt);
-            rs = null; pstmt = null;
-        }
+    	MProcess process = MProcess.get(pi.getAD_Process_ID());
+    	String path = process.getJasperReport();
+    	boolean isPrintPreview = pi.isPrintPreview();
+    	boolean	directPrint = (process.isDirectPrint() && !Ini.isPropertyBool(Ini.P_PRINTPREVIEW) && !isPrintPreview);
+    	return new ReportData( path, directPrint);    	
     }
 
     static class ReportData {
