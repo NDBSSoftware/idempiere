@@ -539,7 +539,7 @@ public class MColumn extends X_AD_Column
 				&& ( ! (DisplayType.isID(getAD_Reference_ID()) && defaultValue.equals("-1") ) ) )  // not for ID's with default -1
 		{
 			if (DisplayType.isText(getAD_Reference_ID()) 
-					|| getAD_Reference_ID() == DisplayType.List
+					|| DisplayType.isList(getAD_Reference_ID())
 					|| getAD_Reference_ID() == DisplayType.YesNo
 					// Two special columns: Defined as Table but DB Type is String 
 					|| getColumnName().equals("EntityType") || getColumnName().equals("AD_Language")
@@ -591,7 +591,7 @@ public class MColumn extends X_AD_Column
 			&& ( ! (DisplayType.isID(getAD_Reference_ID()) && defaultValue.equals("-1") ) ) )  // not for ID's with default -1
 		{
 			if (DisplayType.isText(getAD_Reference_ID()) 
-				|| getAD_Reference_ID() == DisplayType.List
+				|| DisplayType.isList(getAD_Reference_ID())
 				|| getAD_Reference_ID() == DisplayType.YesNo
 				// Two special columns: Defined as Table but DB Type is String 
 				|| getColumnName().equals("EntityType") || getColumnName().equals("AD_Language")
@@ -823,7 +823,7 @@ public class MColumn extends X_AD_Column
 				foreignTable = "AD_Org";
 			else if ("C_ProjectType_ID".equalsIgnoreCase(getColumnName()))
 				foreignTable = "C_ProjectType";
-		} else if (DisplayType.List == refid || DisplayType.Payment == refid) {
+		} else if (DisplayType.isList(refid) || DisplayType.Payment == refid) {
 			foreignTable = "AD_Ref_List";
 		} else if (DisplayType.Location == refid) {
 			foreignTable = "C_Location";
@@ -964,7 +964,7 @@ public class MColumn extends X_AD_Column
 		if (!column.isKey() && !column.getColumnName().equals(PO.getUUIDColumnName(table.getTableName())) && !column.isVirtualColumn())
 		{
 			int refid = column.getAD_Reference_ID();
-			if (refid != DisplayType.List && refid != DisplayType.Payment)
+			if (!DisplayType.isList(refid) && refid != DisplayType.Payment)
 			{
 				String referenceTableName = column.getReferenceTableName();
 				if (referenceTableName != null)
@@ -1176,7 +1176,7 @@ public class MColumn extends X_AD_Column
 				return "";
 
 			int refid = column.getAD_Reference_ID();
-			if (refid != DisplayType.List && refid != DisplayType.Payment)
+			if (!DisplayType.isList(refid) && refid != DisplayType.Payment)
 			{
 				String referenceTableName = column.getReferenceTableName();
 				if (referenceTableName != null)

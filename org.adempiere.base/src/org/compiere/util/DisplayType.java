@@ -314,6 +314,27 @@ public final class DisplayType
 		
 		return false;
 	}	//	isDate
+	
+	/**
+	 *	Returns true if DisplayType is a List.
+	 *  (stored as Text)
+	 *  @param displayType Display Type
+	 *  @return true if List
+	 */
+	public static boolean isList(int displayType)
+	{
+		if (DisplayType.List == displayType
+				|| DisplayType.ChosenMultipleSelectionList == displayType)
+			return true;
+		
+		List<IDisplayTypeFactory> factoryList = Service.locator().list(IDisplayTypeFactory.class).getServices();
+		for(IDisplayTypeFactory factory : factoryList){
+			if(factory.isList(displayType))
+				return true;
+		}
+		
+		return false;
+	}	//	isList
 
 	/**
 	 *	Returns true if DisplayType is a VLookup (List, Table, TableDir, Search).
