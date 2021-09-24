@@ -30,7 +30,7 @@ public class X_AD_Package_Exp_Detail extends PO implements I_AD_Package_Exp_Deta
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20201220L;
+	private static final long serialVersionUID = 20210923L;
 
     /** Standard Constructor */
     public X_AD_Package_Exp_Detail (Properties ctx, int AD_Package_Exp_Detail_ID, String trxName)
@@ -716,6 +716,20 @@ public class X_AD_Package_Exp_Detail extends PO implements I_AD_Package_Exp_Deta
 		return (String)get_Value(COLUMNNAME_Destination_FileName);
 	}
 
+	/** Set Execution Code.
+		@param ExecCode Execution Code	  */
+	public void setExecCode (String ExecCode)
+	{
+		set_Value (COLUMNNAME_ExecCode, ExecCode);
+	}
+
+	/** Get Execution Code.
+		@return Execution Code	  */
+	public String getExecCode () 
+	{
+		return (String)get_Value(COLUMNNAME_ExecCode);
+	}
+
 	/** Set File_Directory.
 		@param File_Directory File_Directory	  */
 	public void setFile_Directory (String File_Directory)
@@ -901,10 +915,6 @@ public class X_AD_Package_Exp_Detail extends PO implements I_AD_Package_Exp_Deta
 
 	/** Type AD_Reference_ID=50004 */
 	public static final int TYPE_AD_Reference_ID=50004;
-	/** Workbench = B */
-	public static final String TYPE_Workbench = "B";
-	/** File - Code or other = C */
-	public static final String TYPE_File_CodeOrOther = "C";
 	/** Data = D */
 	public static final String TYPE_Data = "D";
 	/** Workflow = F */
@@ -919,8 +929,10 @@ public class X_AD_Package_Exp_Detail extends PO implements I_AD_Package_Exp_Deta
 	public static final String TYPE_ReportView = "R";
 	/** Role = S */
 	public static final String TYPE_Role = "S";
-	/** Code Snipit = SNI */
-	public static final String TYPE_CodeSnipit = "SNI";
+	/** Script JSR223 = SCJ */
+	public static final String TYPE_ScriptJSR223 = "SCJ";
+	/** Shell Script = SH */
+	public static final String TYPE_ShellScript = "SH";
 	/** SQL Statement = SQL */
 	public static final String TYPE_SQLStatement = "SQL";
 	/** Table = T */
