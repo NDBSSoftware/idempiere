@@ -307,12 +307,19 @@ public class Query
 	public <T extends PO> T first() throws DBException
 	{
 		T po = null;
-		String sql = buildSQL(null, true);
+		
+		int oldPageSize = this.pageSize;
+		if(DB.getDatabase().isPagingSupported())
+			setPageSize(1);	// Limit to One record
+		
+		String sql = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
 		{
+			sql = buildSQL(null, true);
+			
 			pstmt = DB.prepareStatement (sql, trxName);
 			rs = createResultSet(pstmt);
 			if (rs.next ())
@@ -327,6 +334,7 @@ public class Query
 		} finally {
 			DB.close(rs, pstmt);
 			rs = null; pstmt = null;
+			setPageSize(oldPageSize);
 		}
 		return po;
 	}
@@ -342,12 +350,19 @@ public class Query
 	public <T extends PO> T firstOnly() throws DBException
 	{
 		T po = null;
-		String sql = buildSQL(null, true);
+		
+		int oldPageSize = this.pageSize;
+		if(DB.getDatabase().isPagingSupported())
+			setPageSize(2);	// Limit to 2 Records
+		
+		String sql = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
 		{
+			sql = buildSQL(null, true);
+			
 			pstmt = DB.prepareStatement (sql, trxName);
 			rs = createResultSet(pstmt);
 			if (rs.next())
@@ -368,6 +383,7 @@ public class Query
 		{
 			DB.close(rs, pstmt);
 			rs = null; pstmt = null;
+			setPageSize(oldPageSize);
 		}
 		return po;
 	}
@@ -406,13 +422,20 @@ public class Query
 			selectClause.append(table.getTableName()).append(".");
 		selectClause.append(keys[0]);
 		selectClause.append(" FROM ").append(table.getTableName());
-		String sql = buildSQL(selectClause, true);
+		
+		int oldPageSize = this.pageSize;
+		if(DB.getDatabase().isPagingSupported())
+			setPageSize(assumeOnlyOneResult ? 2 : 1);
 
+		String sql = null;
+		
 		int id = -1;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
 		{
+			sql = buildSQL(selectClause, true);
+			
 			pstmt = DB.prepareStatement(sql, trxName);
 			rs = createResultSet(pstmt);
 			if (rs.next())
@@ -432,6 +455,7 @@ public class Query
 		{
 			DB.close(rs, pstmt);
 			rs = null; pstmt = null;
+			setPageSize(oldPageSize);
 		}
 		//
 		return id;
