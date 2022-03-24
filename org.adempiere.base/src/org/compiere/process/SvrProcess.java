@@ -204,6 +204,7 @@ public abstract class SvrProcess implements ProcessCall
 							unlock();
 							
 							// outside transaction processing [ teo_sarca, 1646891 ]
+							m_trx = null;
 							postProcess(!m_pi.isError());
 							@SuppressWarnings("unused")
 							Event eventPP = sendProcessEvent(IEventTopics.POST_PROCESS);
@@ -600,7 +601,8 @@ public abstract class SvrProcess implements ProcessCall
 			if (m_pi != null)
 				m_pi.addLog(entryLog);
 			if (log.isLoggable(Level.INFO)) log.info(entryLog.getP_ID() + " - " + entryLog.getP_Date() + " - " + entryLog.getP_Number() + " - " + entryLog.getP_Msg() + " - " + entryLog.getAD_Table_ID() + " - " + entryLog.getRecord_ID());
-		}							
+		}
+		listEntryLog = null; // flushed - to avoid flushing it again in case is called
 	}
 
 	/**************************************************************************

@@ -135,7 +135,7 @@ public class DB_PostgreSQL implements AdempiereDatabase
 
     private static final String NATIVE_MARKER = "NATIVE_"+Database.DB_POSTGRESQL+"_KEYWORK";
 
-    private CCache<String, String> convertCache = new CCache<String, String>(null, "DB_PostgreSQL_Convert_Cache", 1000, 60, false);
+    private CCache<String, String> convertCache = new CCache<String, String>(null, "DB_PostgreSQL_Convert_Cache", 1000, CCache.DEFAULT_EXPIRE_MINUTE, false);
 
     private Random rand = new Random();
 
@@ -209,7 +209,7 @@ public class DB_PostgreSQL implements AdempiereDatabase
 			.append(connection.getDbHost())
 			.append(":").append(connection.getDbPort())
 			.append("/").append(connection.getDbName())
-			.append("?encoding=UNICODE");
+			.append("?encoding=UNICODE&ApplicationName=iDempiere");
 
 		String urlParameters = System.getProperty("org.idempiere.postgresql.URLParameters");
 	    if (!Util.isEmpty(urlParameters)) {
