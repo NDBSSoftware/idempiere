@@ -238,7 +238,32 @@ public final class EMail implements Serializable
 	 *	Send Mail direct
 	 *	@return OK or error message
 	 */
-	public String send ()
+	public String send()
+	{
+		String msg;
+		try {
+			msg = send(false);
+		} catch (Exception e) {
+			msg = e.getLocalizedMessage();
+		}
+		return msg;
+	}
+
+	/**
+	 *	Send Mail direct
+	 *	@return OK or error message
+	 */
+	public String sendEx() throws Exception
+	{
+		return send(true);
+	}
+
+	/**
+	 *	Send Mail direct
+	 *	@return OK or error message
+	 * @throws Exception 
+	 */
+	public String send(boolean throwException) throws Exception
 	{
 		if (log.isLoggable(Level.INFO)){
 			log.info("(" + m_smtpHost + ") " + m_from + " -> " + m_to);
@@ -294,12 +319,16 @@ public final class EMail implements Serializable
 		}
 		catch (SecurityException se)
 		{
+			if (throwException)
+				throw se;
 			log.log(Level.WARNING, "Auth=" + m_auth + " - " + se.toString());
 			m_sentMsg = se.toString();
 			return se.toString();
 		}
 		catch (Exception e)
 		{
+			if (throwException)
+				throw e;
 			log.log(Level.SEVERE, "Auth=" + m_auth, e);
 			m_sentMsg = e.toString();
 			return e.toString();
@@ -387,6 +416,8 @@ public final class EMail implements Serializable
 		}
 		catch (MessagingException me)
 		{
+			if (throwException)
+				throw me;
 			me.printStackTrace();
 			Exception ex = me;
 			StringBuilder sb = new StringBuilder("(ME)");
@@ -470,6 +501,8 @@ public final class EMail implements Serializable
 		}
 		catch (Exception e)
 		{
+			if (throwException)
+				throw e;
 			log.log(Level.SEVERE, "", e);
 			m_sentMsg = e.getLocalizedMessage();
 			return e.getLocalizedMessage();
@@ -525,13 +558,13 @@ public final class EMail implements Serializable
 	 */
 	private void dumpMessage()
 	{
-		if (m_msg == null)
+		if (m_msg == null || !log.isLoggable(Level.FINEST))
 			return;
 		try
 		{
 			Enumeration<?> e = m_msg.getAllHeaderLines ();
 			while (e.hasMoreElements ())
-				if (log.isLoggable(Level.FINE)) log.fine("- " + e.nextElement ());
+				log.finest("- " + e.nextElement ());
 		}
 		catch (MessagingException ex)
 		{
