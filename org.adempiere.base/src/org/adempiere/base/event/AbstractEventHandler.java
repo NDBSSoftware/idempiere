@@ -18,6 +18,7 @@ import java.util.UUID;
 
 import org.compiere.model.PO;
 import org.compiere.process.ProcessInfo;
+import org.compiere.util.CLogger;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
@@ -167,6 +168,8 @@ public abstract class AbstractEventHandler implements EventHandler {
 		if (msg == null)
 			msg = e.toString();
 		addErrorMessage(event, msg);
+		if (e instanceof Exception)
+			CLogger.get().saveError("Error", (Exception) e);
 	}
 
 	/**
