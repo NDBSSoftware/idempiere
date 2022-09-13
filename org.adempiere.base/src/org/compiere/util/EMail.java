@@ -290,6 +290,10 @@ public final class EMail implements Serializable
 			props.put("mail.debug", "true");
 		//
 
+		boolean isOAuth2 = false;
+		if (m_auth != null)
+			isOAuth2 = m_auth.isOAuth2();
+
 		Session session = null;
 		try
 		{
@@ -307,12 +311,13 @@ public final class EMail implements Serializable
 			{
 				props.put("mail.smtp.starttls.enable", "true");
 			}
-			if (m_auth != null && m_auth.isOAuth2()) {
+			if (isOAuth2) {
 				props.put("mail.smtp.auth.mechanisms", "XOAUTH2");
 			    props.put("mail.smtp.starttls.required", "true");
 			    props.put("mail.smtp.auth.login.disable","true");
 			    props.put("mail.smtp.auth.plain.disable","true");
 			    props.put("mail.debug.auth", "true");
+				m_auth = new EMailAuthenticator (m_auth.getPasswordAuthentication().getUserName(), m_auth.getPasswordAuthentication().getPassword());
 			}
 			session = Session.getInstance(props);
 			session.setDebug(CLogMgt.isLevelFinest());
