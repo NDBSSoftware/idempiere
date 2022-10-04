@@ -265,6 +265,15 @@ public interface I_AD_Client
 	  */
 	public boolean isUseBetaFunctions();
 
+    /** Column name LoginPrefix */
+    public static final String COLUMNNAME_LoginPrefix = "LoginPrefix";
+
+	/** Set Login Prefix	  */
+	public void setLoginPrefix (String LoginPrefix);
+
+	/** Get Login Prefix	  */
+	public String getLoginPrefix();
+
     /** Column name MMPolicy */
     public static final String COLUMNNAME_MMPolicy = "MMPolicy";
 
