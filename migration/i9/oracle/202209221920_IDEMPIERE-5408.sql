@@ -9,7 +9,7 @@ INSERT INTO AD_Element (AD_Element_ID,AD_Client_ID,AD_Org_ID,IsActive,Created,Cr
 ;
 
 -- Sep 22, 2022, 7:21:50 PM CEST
-INSERT INTO AD_Column (AD_Column_ID,Version,Name,AD_Table_ID,ColumnName,FieldLength,IsKey,IsParent,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsEncrypted,AD_Reference_ID,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,AD_Element_ID,IsUpdateable,IsSelectionColumn,EntityType,IsSyncDatabase,IsAlwaysUpdateable,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsAllowCopy,SeqNoSelection,IsToolbarButton,IsSecure,FKConstraintType,IsHtml,AD_InfoWindow_ID) VALUES (215385,0,'Login Prefix',112,'LoginPrefix',40,'N','N','N','N','N',0,'N',10,0,0,'Y',TO_TIMESTAMP('2022-09-22 19:21:49','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2022-09-22 19:21:49','YYYY-MM-DD HH24:MI:SS'),100,203679,'Y','N','D','N','N','N','Y','813befa6-0922-4583-b673-c965dbc925f8','Y',0,'N','N','N','N',200000)
+INSERT INTO AD_Column (AD_Column_ID,Version,Name,AD_Table_ID,ColumnName,FieldLength,IsKey,IsParent,IsMandatory,IsTranslated,IsIdentifier,SeqNo,IsEncrypted,AD_Reference_ID,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,AD_Element_ID,IsUpdateable,IsSelectionColumn,EntityType,IsSyncDatabase,IsAlwaysUpdateable,IsAutocomplete,IsAllowLogging,AD_Column_UU,IsAllowCopy,SeqNoSelection,IsToolbarButton,IsSecure,FKConstraintType,IsHtml) VALUES (215385,0,'Login Prefix',112,'LoginPrefix',40,'N','N','N','N','N',0,'N',10,0,0,'Y',TO_TIMESTAMP('2022-09-22 19:21:49','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2022-09-22 19:21:49','YYYY-MM-DD HH24:MI:SS'),100,203679,'Y','N','D','N','N','N','Y','813befa6-0922-4583-b673-c965dbc925f8','Y',0,'N','N','N','N')
 ;
 
 -- Sep 22, 2022, 7:22:04 PM CEST
