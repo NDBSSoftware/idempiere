@@ -137,6 +137,7 @@ public class WSQLQuery extends ADForm implements EventListener<Event>
 
 		div.appendChild(m_lblSql);
 		div.appendChild(m_txbSqlField);
+		ZKUpdateUtil.setWidth(m_txbSqlField, "80%");
 		div.appendChild(m_btnSql);
 		north.appendChild(div);
 		layout.appendChild(north);
