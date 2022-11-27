@@ -55,7 +55,7 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = -3262889055635240201L;
+	private static final long serialVersionUID = -5864290156946526195L;
 
 	private static final String POPUP_INFO_BACKGROUND_STYLE = "background-color: #262626; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid #262626; border-radius: 3px; ";
 	private static final String POPUP_ERROR_BACKGROUND_STYLE = "background-color: #8B0000; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid #8B0000; border-radius: 3px; ";
@@ -174,6 +174,7 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
 
         m_text = text;
         m_dse = dse;
+        invalidate();
     }
 
     /**
@@ -238,6 +239,7 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
 	    	AuScript aus = new AuScript(popup, script);
 	    	Clients.response("statusPopupFade", aus);
     	}
+    	invalidate();
     }
 
     /**
@@ -303,6 +305,7 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
 			infoLine.setVisible(false);
 		else
 			infoLine.setVisible(true);
+		invalidate();
 	}	//	setInfo
 
 	public void setSelectedRowNumber (String rowNum){
@@ -310,6 +313,7 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
 		if (rowNum != null){
 			selectedLine.setValue(rowNum);
 		}
+		invalidate();
 	}
 	
 	public void onEvent(Event event) throws Exception {

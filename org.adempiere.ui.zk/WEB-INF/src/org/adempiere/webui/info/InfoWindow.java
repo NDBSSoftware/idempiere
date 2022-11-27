@@ -128,7 +128,7 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5041961608373943362L;
+	private static final long serialVersionUID = 7699952471282929468L;
 
 	protected Grid parameterGrid;
 	private Borderlayout layout;
@@ -242,7 +242,7 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 			initInfoProcess();
 			// when have a process, force multi select mode
 			if (haveProcess)
-				p_multipleSelection = true;
+				setMultipleSelection(true);
 		}		
 						
 		if (!isAutoComplete)
