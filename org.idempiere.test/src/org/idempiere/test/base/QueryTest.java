@@ -39,6 +39,8 @@ import org.adempiere.exceptions.DBException;
 import org.compiere.model.MPInstance;
 import org.compiere.model.MProcess;
 import org.compiere.model.MTable;
+import org.compiere.model.MTest;
+import org.compiere.model.PO;
 import org.compiere.model.POResultSet;
 import org.compiere.model.Query;
 import org.compiere.model.X_AD_Element;
