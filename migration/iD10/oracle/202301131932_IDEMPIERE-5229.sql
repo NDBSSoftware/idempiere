@@ -21,7 +21,7 @@ INSERT INTO AD_Window (AD_Window_ID,Name,AD_Client_ID,AD_Org_ID,IsActive,Created
 ;
 
 -- Jan 13, 2023, 9:27:28 PM CET
-INSERT INTO AD_Table (AD_Table_ID,Name,Description,AD_Window_ID,TableName,AccessLevel,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,IsSecurityEnabled,IsDeleteable,IsHighVolume,IsView,EntityType,IsChangeLog,ReplicationType,IsCentrallyMaintained,AD_Table_UU,Processing,IsShowInDrillOptions) VALUES (200382,'Verify Migration','Verify Migration Helper',200137,'AD_VerifyMigration','4',0,0,'Y',TO_TIMESTAMP('2023-01-13 21:27:28','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2023-01-13 21:27:28','YYYY-MM-DD HH24:MI:SS'),100,'N','Y','N','N','D','Y','L','Y','2dc9992b-f4ca-4bb7-9632-3c51b3001c22','N','Y')
+INSERT INTO AD_Table (AD_Table_ID,Name,Description,AD_Window_ID,TableName,AccessLevel,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,IsSecurityEnabled,IsDeleteable,IsHighVolume,IsView,EntityType,IsChangeLog,ReplicationType,IsCentrallyMaintained,AD_Table_UU,Processing) VALUES (200382,'Verify Migration','Verify Migration Helper',200137,'AD_VerifyMigration','4',0,0,'Y',TO_TIMESTAMP('2023-01-13 21:27:28','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2023-01-13 21:27:28','YYYY-MM-DD HH24:MI:SS'),100,'N','Y','N','N','D','Y','L','Y','2dc9992b-f4ca-4bb7-9632-3c51b3001c22','N')
 ;
 
 -- Jan 13, 2023, 9:27:28 PM CET

@@ -195,7 +195,7 @@ public class VerifyMigration extends SvrProcess {
 			Connection conn = null;
 			ResultSet rs = null;
 			try {
-				conn = DB.getConnection();
+				conn = DB.getConnectionRO();
 				DatabaseMetaData md = conn.getMetaData();
 				String catalog = DB.getDatabase().getCatalog();
 				String schema = DB.getDatabase().getSchema();
