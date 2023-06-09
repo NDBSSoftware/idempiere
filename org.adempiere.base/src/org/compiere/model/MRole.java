@@ -952,7 +952,7 @@ public final class MRole extends X_AD_Role implements ImmutablePOSupport
 		MTable table = MTable.get(getCtx(), tableName);
 		if (table == null)
 			return false;
-		return MTable.get(getCtx(), tableName).isView();
+		return table.isView();
 	}
 	
 	private String getIdColumnName(String tableName)
@@ -961,7 +961,7 @@ public final class MRole extends X_AD_Role implements ImmutablePOSupport
 		MTable table = MTable.get(getCtx(), tableName);
 		if (table == null)
 			return null;
-		if (MTable.get(getCtx(), tableName).columnExists(colkey.toString()))
+		if (table.getColumnIndex(colkey.toString()) >= 0)
 			return colkey.toString();
 		return null;
 	}
