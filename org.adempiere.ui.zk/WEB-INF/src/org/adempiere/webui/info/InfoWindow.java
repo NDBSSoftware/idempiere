@@ -867,6 +867,9 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 				String s_sqlFrom = embedInfo.getFromClause();
 				/** Where Clause						*/
 				String s_sqlWhere = relatedInfo.getLinkColumnName() + "=?";
+				String infoWhere = embedInfo.getWhereClause(); 
+				if(!Util.isEmpty(infoWhere))
+					s_sqlWhere += " AND (" + infoWhere + ")";
 				String s_sqlCount = "SELECT COUNT(*) FROM " + s_sqlFrom + " WHERE " + s_sqlWhere;
 				m_sqlEmbedded = embeddedTbl.prepareTable(s_layoutEmbedded, s_sqlFrom, s_sqlWhere, false, tableName);
 
@@ -2575,10 +2578,20 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 		
 		boolean hasNew = getADWindowID () > 0;
 		if (hasNew && vqe == null && hasRightQuickEntry){
-			GridWindow gridwindow = GridWindow.get(Env.getCtx(), 0, getADWindowID());
+			GridWindow gridwindow = GridWindow.get(Env.getCtx(), -1, getADWindowID());
 			hasRightQuickEntry = gridwindow != null;
-			if (hasRightQuickEntry)
-				vqe = Extensions.getQuickEntry(0, 0, getADWindowID());
+			if (hasRightQuickEntry) {
+				vqe = Extensions.getQuickEntry(p_WindowNo, 0, getADWindowID());
+				if (vqe != null) {
+					int windowNo = SessionManager.getAppDesktop().findWindowNo(vqe);
+					if (windowNo > 0 && windowNo != p_WindowNo) {
+						SessionManager.getAppDesktop().unregisterWindow(windowNo);
+					}
+				}
+			}
+			//clear gridWindow context
+			if (gridwindow != null)
+				Env.clearWinContext(-1);
 		}
 			
 		return hasNew && vqe != null && vqe.isAvailableQuickEdit();
