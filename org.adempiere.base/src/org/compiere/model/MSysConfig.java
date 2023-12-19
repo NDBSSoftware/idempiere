@@ -44,7 +44,7 @@ public class MSysConfig extends X_AD_SysConfig
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8121703411463724745L;
+	private static final long serialVersionUID = -5704255533313895267L;
 
 	public static final String ADDRESS_VALIDATION = "ADDRESS_VALIDATION";
     public static final String ALERT_SEND_ATTACHMENT_AS_XLS = "ALERT_SEND_ATTACHMENT_AS_XLS";
@@ -148,6 +148,7 @@ public class MSysConfig extends X_AD_SysConfig
     public static final String MONITOR_MAX_WAIT_FOR_CLUSTER_IN_SECONDS = "MONITOR_MAX_WAIT_FOR_CLUSTER_IN_SECONDS";
     public static final String MFG_ValidateCostsDifferenceOnCreate = "MFG_ValidateCostsDifferenceOnCreate";
     public static final String MFG_ValidateCostsOnCreate = "MFG_ValidateCostsOnCreate";
+	public static final String MROLE_GETDEFAULT_RETURNS_NULL_WHEN_NO_CONTEXT = "MROLE_GETDEFAULT_RETURNS_NULL_WHEN_NO_CONTEXT";
     public static final String MSEQUENCE_GETNEXT_TIMEOUT = "MSEQUENCE_GETNEXT_TIMEOUT";
 	public static final String ORDER_COLUMNS_TO_COPY_TO_NOT_COMPLETED_INVOICES = "ORDER_COLUMNS_TO_COPY_TO_NOT_COMPLETED_INVOICES";
     public static final String PAYMENT_OVERWRITE_DOCUMENTNO_WITH_CHECK_ON_PAYMENT = "PAYMENT_OVERWRITE_DOCUMENTNO_WITH_CHECK_ON_PAYMENT";
