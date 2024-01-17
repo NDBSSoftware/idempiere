@@ -24,8 +24,10 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import org.compiere.Adempiere;
 import org.compiere.util.CCache;
 import org.compiere.util.CLogger;
+import org.compiere.util.CacheMgt;
 import org.compiere.util.DB;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Util;
@@ -44,7 +46,7 @@ public class MSysConfig extends X_AD_SysConfig
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2142964978328623328L;
+	private static final long serialVersionUID = 8033573879925381783L;
 
 	public static final String ADDRESS_VALIDATION = "ADDRESS_VALIDATION";
     public static final String ALERT_SEND_ATTACHMENT_AS_XLS = "ALERT_SEND_ATTACHMENT_AS_XLS";
@@ -871,6 +873,19 @@ public class MSysConfig extends X_AD_SysConfig
 			+", Client|Org="+getAD_Client_ID()+"|"+getAD_Org_ID()
 			+", EntityType="+getEntityType()
 			+"]";
+	}
+
+	@Override
+	protected boolean afterSave(boolean newRecord, boolean success) {
+		if (success && newRecord && ! getName().endsWith("_NOCACHE")) {
+			// Clear cache of AD_SysConfig
+			// This is to clear the cache of AD_SysConfig when creating a new record
+			// the reset cache is being called on PO when a record is changed or deleted, but not on new
+			// NOTE also that reset the specific ID doesn't work because the MSysConfig cache holds a
+			//   String type, and CCache.reset(int) just call reset when the key is not an Integer
+			Adempiere.getThreadPoolExecutor().submit(() -> CacheMgt.get().reset(Table_Name));
+		}
+		return success;
 	}
 
 }	//	MSysConfig;
