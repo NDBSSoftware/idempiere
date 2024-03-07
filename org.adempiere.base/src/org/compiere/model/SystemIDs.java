@@ -142,6 +142,7 @@ public class SystemIDs
 	public final static int REFERENCE_DATATYPE_TABLEDIR = 19;
 	public final static int REFERENCE_DATATYPE_TEXT = 14;
 	public final static int REFERENCE_DATATYPE_TEXTLONG = 36;
+	public final static int REFERENCE_DATATYPE_JSON = 200267;
 	public final static int REFERENCE_DATATYPE_TIME = 24;
 	public final static int REFERENCE_DATATYPE_URL = 40;
 	public final static int REFERENCE_DATATYPE_YES_NO = 20;

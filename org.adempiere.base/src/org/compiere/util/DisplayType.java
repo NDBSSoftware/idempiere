@@ -35,6 +35,7 @@ import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_FILEPATH;
 import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_ID;
 import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_IMAGE;
 import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_INTEGER;
+import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_JSON;
 import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_LIST;
 import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_LOCATION;
 import static org.compiere.model.SystemIDs.REFERENCE_DATATYPE_LOCATOR;
@@ -171,6 +172,8 @@ public final class DisplayType
 	public static final int ChosenMultipleSelectionTable = REFERENCE_DATATYPE_CHOSEN_MULTIPLE_SELECTION_TABLE;
 	
 	public static final int ChosenMultipleSelectionSearch = REFERENCE_DATATYPE_CHOSEN_MULTIPLE_SELECTION_SEARCH;
+
+	public static final int JSON  = REFERENCE_DATATYPE_JSON;
 
 	/**
 	 *	- New Display Type
@@ -309,7 +312,7 @@ public final class DisplayType
 	public static boolean isText(int displayType)
 	{
 		if (displayType == String || displayType == Text
-			|| displayType == TextLong || displayType == Memo
+			|| displayType == TextLong || displayType == JSON || displayType == Memo
 			|| displayType == FilePath || displayType == FileName
 			|| displayType == URL || displayType == PrinterName
 			|| displayType == SingleSelectionGrid || displayType == Color
@@ -435,7 +438,8 @@ public final class DisplayType
 	public static boolean isLOB (int displayType)
 	{
 		if (displayType == Binary
-			|| displayType == TextLong)
+			|| displayType == TextLong
+			|| (displayType == JSON && DB.isOracle()))
 			return true;
 		
 		IServiceReferenceHolder<IDisplayTypeFactory> cache = s_displayTypeFactoryCache.get(displayType);
@@ -690,7 +694,7 @@ public final class DisplayType
 	 */
 	public static Class<?> getClass (int displayType, boolean yesNoAsBoolean)
 	{
-		if (isText(displayType) || displayType == List || displayType == Payment || displayType == RadiogroupList)
+		if (isText(displayType) || displayType == List || displayType == Payment || displayType == RadiogroupList || displayType == JSON)
 			return String.class;
 		else if (isID(displayType) || displayType == Integer)    //  note that Integer is stored as BD
 			return Integer.class;
@@ -794,6 +798,8 @@ public final class DisplayType
 			else
 				return getDatabase().getCharacterDataType()+"(" + fieldLength + ")";
 		}
+		if (displayType == DisplayType.JSON)
+			return getDatabase().getJsonDataType();
 		
 		IServiceReferenceHolder<IDisplayTypeFactory> cache = s_displayTypeFactoryCache.get(displayType);
 		if (cache != null) {
@@ -838,6 +844,8 @@ public final class DisplayType
 			return "ID";
 		if (displayType == Text)
 			return "Text";
+		if (displayType == JSON)
+			return "JSON";
 		if (displayType == Date)
 			return "Date";
 		if (displayType == DateTime)

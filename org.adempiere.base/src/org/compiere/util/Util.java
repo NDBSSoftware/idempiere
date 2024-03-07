@@ -37,6 +37,14 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import org.adempiere.exceptions.AdempiereException;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+
 /**
  *  General Utilities
  *
@@ -707,4 +715,20 @@ public class Util
         cal.set(Calendar.MILLISECOND, 0);
         return new Timestamp(cal.getTimeInMillis());
     }
+	
+	/**
+	 * Returns a string with a formatted JSON object  
+	 * @return string with a pretty JSON format 
+	 */
+	public static String prettifyJSONString(String value) {
+		Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+		try {
+			JsonElement jsonElement = new JsonParser().parse(value);
+			return gson.toJson(jsonElement);
+	    } catch (JsonSyntaxException e) {
+	        throw new AdempiereException(Msg.getMsg(Env.getCtx(), "InvalidJSON"));
+	    }
+	}
+
+
 }   //  Util

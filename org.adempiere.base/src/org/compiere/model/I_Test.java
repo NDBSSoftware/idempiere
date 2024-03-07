@@ -238,6 +238,19 @@ public interface I_Test
 	  */
 	public boolean isActive();
 
+    /** Column name JsonData */
+    public static final String COLUMNNAME_JsonData = "JsonData";
+
+	/** Set JSON Data.
+	  * The json field stores json data.
+	  */
+	public void setJsonData (String JsonData);
+
+	/** Get JSON Data.
+	  * The json field stores json data.
+	  */
+	public String getJsonData();
+
     /** Column name M_Locator_ID */
     public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";
 

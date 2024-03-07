@@ -2639,6 +2639,8 @@ public abstract class PO
 			{
 				if (value instanceof Timestamp && dt == DisplayType.Date)
 					sql.append("trunc(cast(? as date))");
+				else if (dt == DisplayType.JSON)
+					sql.append(DB.getJSONCast());
 				else
 					sql.append("?");
 				
@@ -2664,7 +2666,7 @@ public abstract class PO
 					} else {
 						params.add(encrypt(i,value));
 					}
-				}
+				} 
 				else
 				{
 					params.add(value);
@@ -3005,6 +3007,8 @@ public abstract class PO
 			{				
 				if (value instanceof Timestamp && dt == DisplayType.Date)
 					sqlValues.append("trunc(cast(? as date))");
+				else if (dt == DisplayType.JSON)
+					sqlValues.append(DB.getJSONCast());
 				else
 					sqlValues.append("?");
 							
