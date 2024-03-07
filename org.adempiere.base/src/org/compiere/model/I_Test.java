@@ -22,7 +22,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for Test
  *  @author iDempiere (generated) 
- *  @version Release 11
+ *  @version Release 10
  */
 public interface I_Test 
 {
@@ -35,7 +35,7 @@ public interface I_Test
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
 
-    /** AccessLevel = 7 - System - Client - Org
+    /** AccessLevel = 7 - System - Client - Org 
      */
     BigDecimal accessLevel = BigDecimal.valueOf(7);
 
@@ -252,6 +252,19 @@ public interface I_Test
 	  * The record is active in the system
 	  */
 	public boolean isActive();
+
+    /** Column name JsonData */
+    public static final String COLUMNNAME_JsonData = "JsonData";
+
+	/** Set JSON Data.
+	  * The json field stores json data.
+	  */
+	public void setJsonData (String JsonData);
+
+	/** Get JSON Data.
+	  * The json field stores json data.
+	  */
+	public String getJsonData();
 
     /** Column name M_Locator_ID */
     public static final String COLUMNNAME_M_Locator_ID = "M_Locator_ID";

@@ -26,7 +26,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Model for Test
  *  @author iDempiere (generated) 
- *  @version Release 11 - $Id$ */
+ *  @version Release 10 - $Id$ */
 @org.adempiere.base.Model(table="Test")
 public class X_Test extends PO implements I_Test, I_Persistent 
 {
@@ -34,7 +34,7 @@ public class X_Test extends PO implements I_Test, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20230216L;
+	private static final long serialVersionUID = 20240620L;
 
     /** Standard Constructor */
     public X_Test (Properties ctx, int Test_ID, String trxName)
@@ -65,7 +65,7 @@ public class X_Test extends PO implements I_Test, I_Persistent
     }
 
     /** AccessLevel
-      * @return 7 - System - Client - Org
+      * @return 7 - System - Client - Org 
       */
     protected int get_AccessLevel()
     {
@@ -358,6 +358,22 @@ public class X_Test extends PO implements I_Test, I_Persistent
 	public String getHelp()
 	{
 		return (String)get_Value(COLUMNNAME_Help);
+	}
+
+	/** Set JSON Data.
+		@param JsonData The json field stores json data.
+	*/
+	public void setJsonData (String JsonData)
+	{
+		set_Value (COLUMNNAME_JsonData, JsonData);
+	}
+
+	/** Get JSON Data.
+		@return The json field stores json data.
+	  */
+	public String getJsonData()
+	{
+		return (String)get_Value(COLUMNNAME_JsonData);
 	}
 
 	public I_M_Locator getM_Locator() throws RuntimeException

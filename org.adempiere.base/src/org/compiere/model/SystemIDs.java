@@ -157,6 +157,7 @@ public class SystemIDs
 	public final static int REFERENCE_DATATYPE_TABLEDIR = 19;
 	public final static int REFERENCE_DATATYPE_TEXT = 14;
 	public final static int REFERENCE_DATATYPE_TEXTLONG = 36;
+	public final static int REFERENCE_DATATYPE_JSON = 200267;
 	public final static int REFERENCE_DATATYPE_TIME = 24;
 	public final static int REFERENCE_DATATYPE_TIMESTAMP_WITH_TIMEZONE = 200133;
 	public final static int REFERENCE_DATATYPE_TIMEZONE = 200135;
