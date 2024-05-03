@@ -2353,14 +2353,10 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         
         //  Test for no records
         if (getNoOfRecords(m_query, true) != 0) {
-        	if (m_total == COUNTING_RECORDS_TIMED_OUT) {
-        		FDialog.error(m_targetWindowNo, "InfoQueryTimeOutError");
-        	} else {
-                if (advancedPanel != null) {
-                	advancedPanel.getItems().clear();
-                }
-                dispose();
+        	if (advancedPanel != null) {
+        		advancedPanel.getItems().clear();
         	}
+        	dispose();
         }
 
     }   //  cmd_ok_Simple
@@ -2435,11 +2431,7 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         }
         
         if (getNoOfRecords(m_query, true) != 0) {
-        	if (m_total == COUNTING_RECORDS_TIMED_OUT) {
-        		FDialog.error(m_targetWindowNo, "InfoQueryTimeOutError");
-        	} else {
-                dispose();
-        	}
+        	dispose();
         }
     }   //  cmd_ok_Advanced
     
@@ -2487,8 +2479,8 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         	Env.setContext(Env.getCtx(), m_targetWindowNo, TABNO, GridTab.CTX_FindSQL, finalSQL);
 
         //  Execute Query
-        int timeout = MSysConfig.getIntValue(MSysConfig.GRIDTABLE_LOAD_TIMEOUT_IN_SECONDS, 
-        		GridTable.DEFAULT_GRIDTABLE_LOAD_TIMEOUT_IN_SECONDS, Env.getAD_Client_ID(Env.getCtx()));
+        int timeout = MSysConfig.getIntValue(MSysConfig.GRIDTABLE_INITIAL_COUNT_TIMEOUT_IN_SECONDS, 
+        		GridTable.DEFAULT_GRIDTABLE_COUNT_TIMEOUT_IN_SECONDS, Env.getAD_Client_ID(Env.getCtx()));
         m_total = 999999;
         Statement stmt = null;
         ResultSet rs = null;
@@ -2523,13 +2515,13 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
         }
         //  No Records
         if (m_total == 0 && alertRecords)
-            FDialog.warn(m_targetWindowNo, this, "FindZeroRecords", null);
-        //  More then allowed
+        	FDialog.warn(m_targetWindowNo, this, "FindZeroRecords", null);
+        //  Load not more than max allow
         if (m_gridTab != null && alertRecords && m_total != COUNTING_RECORDS_TIMED_OUT && m_gridTab.isQueryMax(m_total))
         {
-            FDialog.error(m_targetWindowNo, this, "FindOverMax",
-                m_total + " > " + m_gridTab.getMaxQueryRecords());
-            m_total = 0; // return 0 if more then allowed - teo_sarca [ 1708717 ]
+        	FDialog.info(m_targetWindowNo, this, "FindOverMax",
+                    m_total + " > " + m_gridTab.getMaxQueryRecords());
+            m_total = m_gridTab.getMaxQueryRecords();
         }
         else
             if (log.isLoggable(Level.CONFIG)) log.config("#" + m_total);

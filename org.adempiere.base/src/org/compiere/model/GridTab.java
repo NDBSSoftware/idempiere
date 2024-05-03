@@ -232,9 +232,9 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 	public static final String CTX_IsLookupOnlySelection = "_TabInfo_IsLookupOnlySelection";
 	public static final String CTX_IsAllowAdvancedLookup = "_TabInfo_IsAllowAdvancedLookup";
 
-	//private HashMap<Integer,Integer>	m_PostIts = null;
+	public static final int DEFAULT_GLOBAL_MAX_QUERY_RECORDS = 100000;
 
-	/**************************************************************************
+	/**
 	 *  Tab loader for Tabs > 0
 	 */
 	class Loader extends ContextRunnable
@@ -2572,20 +2572,23 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		}
 		//  Row Count
 		int rows = getRowCount();
-		if (rows == 0)
+		if (rows == 0 && !m_mTable.isLoading())
 		{
 			log.fine("No Rows");
 			return -1;
 		}
 		if (newRow >= rows)
 		{
-			newRow = rows-1;
-			if (log.isLoggable(Level.FINE)) log.fine("Set to max Row: " + newRow);
+			if (!m_mTable.isLoading())
+			{
+				newRow = rows-1;
+				if (log.isLoggable(Level.FINE)) log.fine("Set to max Row: " + newRow);
+			}
 		}
 		else if (newRow < 0)
 		{
 			newRow = 0;
-			log.fine("Set to first Row");
+			if (log.isLoggable(Level.FINE)) log.fine("Set to first Row");
 		}
 		
 		m_mTable.waitLoadingForRow(newRow);
@@ -3466,6 +3469,9 @@ public class GridTab implements DataStatusListener, Evaluatee, Serializable
 		int tabMaxQueryRecords = m_vo.MaxQueryRecords;
 		if (roleMaxQueryRecords > 0 && (roleMaxQueryRecords < tabMaxQueryRecords || tabMaxQueryRecords == 0))
 			tabMaxQueryRecords = roleMaxQueryRecords;
+		if (tabMaxQueryRecords == 0)
+			tabMaxQueryRecords = MSysConfig.getIntValue(MSysConfig.GLOBAL_MAX_QUERY_RECORDS, 
+	        		DEFAULT_GLOBAL_MAX_QUERY_RECORDS, Env.getAD_Client_ID(Env.getCtx()));
 		return tabMaxQueryRecords;
 	}
 
