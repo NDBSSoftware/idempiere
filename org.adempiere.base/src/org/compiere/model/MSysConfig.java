@@ -44,7 +44,7 @@ public class MSysConfig extends X_AD_SysConfig
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5615620324225975204L;
+	private static final long serialVersionUID = -2142964978328623328L;
 
 	public static final String ADDRESS_VALIDATION = "ADDRESS_VALIDATION";
     public static final String ALERT_SEND_ATTACHMENT_AS_XLS = "ALERT_SEND_ATTACHMENT_AS_XLS";
@@ -108,6 +108,7 @@ public class MSysConfig extends X_AD_SysConfig
     public static final String FORM_SQL_QUERY_MAX_RECORDS = "FORM_SQL_QUERY_MAX_RECORDS";
     public static final String FORM_SQL_QUERY_TIMEOUT_IN_SECONDS = "FORM_SQL_QUERY_TIMEOUT_IN_SECONDS";
 	public static final String GLOBAL_MAX_QUERY_RECORDS = "GLOBAL_MAX_QUERY_RECORDS";
+	public static final String GLOBAL_MAX_REPORT_RECORDS = "GLOBAL_MAX_REPORT_RECORDS";
     public static final String GRIDTABLE_LOAD_TIMEOUT_IN_SECONDS = "GRIDTABLE_LOAD_TIMEOUT_IN_SECONDS";
 	public static final String GRIDTABLE_INITIAL_COUNT_TIMEOUT_IN_SECONDS = "GRIDTABLE_INITIAL_COUNT_TIMEOUT_IN_SECONDS";
     public static final String HTML_REPORT_MINIFY = "HTML_REPORT_MINIFY";
@@ -171,6 +172,7 @@ public class MSysConfig extends X_AD_SysConfig
     public static final String REAL_TIME_POS = "REAL_TIME_POS";
     public static final String RecentItems_MaxSaved = "RecentItems_MaxSaved";
     public static final String RecentItems_MaxShown = "RecentItems_MaxShown";
+	public static final String REPORT_LOAD_TIMEOUT_IN_SECONDS = "REPORT_LOAD_TIMEOUT_IN_SECONDS";
     public static final String REPORT_SWAP_MAX_ROWS = "REPORT_SWAP_MAX_ROWS";
     public static final String SHIPPING_DEFAULT_WEIGHT_PER_PACKAGE = "SHIPPING_DEFAULT_WEIGHT_PER_PACKAGE";
     public static final String STANDARD_REPORT_FOOTER_TRADEMARK_TEXT = "STANDARD_REPORT_FOOTER_TRADEMARK_TEXT";
