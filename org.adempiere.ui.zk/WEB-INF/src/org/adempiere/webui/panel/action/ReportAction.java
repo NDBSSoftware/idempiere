@@ -281,7 +281,7 @@ public class ReportAction implements EventListener<Event>
 		//	Query
 		boolean currentRowOnly = chkCurrentRowOnly.isChecked();
 		int Record_ID = 0;
-		List <Integer> RecordIDs = null;
+		List <Integer> jasperRecordIDs = null;
 		MQuery query = new MQuery(gridTab.getTableName());
 		StringBuilder whereClause = new StringBuilder("");
 
@@ -296,10 +296,11 @@ public class ReportAction implements EventListener<Event>
 		else
 		{
 			whereClause.append(gridTab.getTableModel().getSelectWhereClause());
-			RecordIDs = new ArrayList<Integer>();
-			for(int i = 0; i < gridTab.getRowCount(); i++)
-			{
-				RecordIDs.add(gridTab.getKeyID(i));
+			if (pf != null && pf.getJasperProcess_ID() > 0) {
+				jasperRecordIDs = new ArrayList<Integer>();
+				for(int i = 0; i < gridTab.getRowCount(); i++) {
+					jasperRecordIDs.add(gridTab.getKeyID(i));
+				}
 			}
 		}
 
@@ -339,7 +340,7 @@ public class ReportAction implements EventListener<Event>
 		{			
 			// It's a report using the JasperReports engine
 			ProcessInfo pi = new ProcessInfo ("", pf.getJasperProcess_ID(), pf.getAD_Table_ID(), Record_ID);
-			pi.setRecord_IDs(RecordIDs);
+			pi.setRecord_IDs(jasperRecordIDs);
 			//pi.setIsBatch(true);
 			
 			if (export)
