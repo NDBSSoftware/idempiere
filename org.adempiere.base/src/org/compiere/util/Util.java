@@ -18,7 +18,10 @@ package org.compiere.util;
 
 import java.awt.Color;
 import java.awt.font.TextAttribute;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
@@ -38,6 +41,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.adempiere.exceptions.AdempiereException;
+import org.compiere.Adempiere;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -715,6 +719,13 @@ public class Util
         cal.set(Calendar.MILLISECOND, 0);
         return new Timestamp(cal.getTimeInMillis());
     }
+
+	/**
+	 * @return true if there is a directory org.adempiere.base within AdempiereHome (is the case when executed from Eclipse) 
+	 */
+	public static boolean isDeveloperMode() {
+		return Files.isDirectory(Paths.get(Adempiere.getAdempiereHome() + File.separator + "org.adempiere.base"));
+	}
 	
 	/**
 	 * Returns a string with a formatted JSON object  

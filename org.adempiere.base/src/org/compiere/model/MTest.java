@@ -37,8 +37,7 @@ public class MTest extends X_Test
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5750690186875693958L;
-
+	private static final long serialVersionUID = 6977728315485250519L;
 
 	/**
 	 * 	Constructor
@@ -63,14 +62,26 @@ public class MTest extends X_Test
 	}	//	MTest
 
 	/**
-	 * 	Test Object Constructor
+	 * 	new Test record Constructor
 	 *	@param ctx context
 	 *	@param testString test string
 	 *	@param testNo test no
 	 */
 	public MTest (Properties ctx, String testString, int testNo)
 	{
-		super(ctx, 0, null);
+		this(ctx, testString, testNo, null);
+	}
+
+	/**
+	 * 	new Test record Constructor
+	 *	@param ctx context
+	 *	@param testString test string
+	 *	@param testNo test no
+	 *  @param trxName
+	 */
+	public MTest (Properties ctx, String testString, int testNo, String trxName)
+	{
+		super(ctx, 0, trxName);
 		testString = testString + "_" + testNo;
 		setName(testString);
 		setDescription(testString + " " + testString + " " + testString);
@@ -84,13 +95,8 @@ public class MTest extends X_Test
 		setC_Currency_ID(100);		//	USD
 		setC_Location_ID(109);		//	Monroe
 		setC_UOM_ID(100);			//	Each
-	//	setC_BPartner_ID(C_BPartner_ID);
-	//	setC_Payment_ID(C_Payment_ID);
-	//	setM_Locator_ID(M_Locator_ID);
-	//	setM_Product_ID(M_Product_ID);
 	}	//	MTest
 
-	
 	/**
 	 * 	Before Delete
 	 *	@return true if it can be deleted

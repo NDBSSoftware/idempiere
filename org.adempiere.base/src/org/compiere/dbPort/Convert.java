@@ -29,6 +29,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
@@ -36,11 +37,13 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.compiere.Adempiere;
 import org.compiere.db.Database;
 import org.compiere.util.CLogger;
 import org.compiere.util.DisplayType;
 import org.compiere.util.Env;
 import org.compiere.util.Ini;
+import org.compiere.util.Util;
 
 /**
  *  Convert SQL to Target DB
@@ -487,7 +490,41 @@ public abstract class Convert
 		return logMigrationScript;
 	}
 
+	/**
+	 * @param ticketComment
+	 * @return migration script file name
+	 */
+	public static String getMigrationScriptFileName(String ticketComment) {
+		// [timestamp]_[ticket].sql
+		String fileName;
+		String now = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());					
+		String pattern = "(IDEMPIERE-[0-9]*)";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(ticketComment);
+		String ticket = null;
+		if (m.find())
+			ticket = m.group(1);
+		if (ticket == null)
+			ticket = "PlaceholderForTicket";
+		fileName = now + "_" + ticket + ".sql";
+		return fileName;
+	}
 
+	/**
+	 * @param dbtype oracle or postgresql
+	 * @return absolute migration script folder path for dbtype 
+	 */
+	public static String getMigrationScriptFolder(String dbtype) {
+		// migration/iD[version]/[oracle|postgresql] directory		
+		String version = Adempiere.MAIN_VERSION.substring(8);
+		String homeScript;
+		if (Util.isDeveloperMode())
+			homeScript = Adempiere.getAdempiereHome() + File.separator;
+		else
+			homeScript = System.getProperty("java.io.tmpdir") + File.separator;
+		return homeScript + "migration" + File.separator + "iD" + version + File.separator + dbtype + File.separator;
+	}
+	
 	private static String [] dontLogTables = new String[] {
 			"AD_ACCESSLOG",
 			"AD_ALERTPROCESSORLOG",
