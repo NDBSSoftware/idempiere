@@ -1217,9 +1217,9 @@ public class Convert_PostgreSQL extends Convert_SQL92 {
 	 * @return
 	 */
 	private String convertAddJson(String statement) {
-		if (statement.toUpperCase().matches(".*\\bCLOB\\b.*\\bCONSTRAINT\\b.*CHECK\\b.*\\bIS JSON\\b.*")) {
+		if (statement.toUpperCase().matches(".*\\bCLOB\\b.*\\bCONSTRAINT\\b.*CHECK\\b.*\\bIS JSON\\).*")) {
 			// remove the CONSTRAINT ... IS JSON part
-			statement = statement.replaceAll("(?i)\\bCONSTRAINT\\b.*CHECK\\b.*\\(.*\\bIS JSON\\b.*\\)", "");
+			statement = statement.replaceAll("(?i)\\bCONSTRAINT\\b.*CHECK\\b.*\\(.*\\bIS JSON\\)", "");
 			// change type CLOB to JSONB
 			statement = statement.replaceAll("(?i)\\bCLOB\\b", "JSONB");
 		}
