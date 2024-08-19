@@ -87,7 +87,6 @@ public class MTableIndex extends X_AD_TableIndex {
 	public MTableIndex(Properties ctx, ResultSet rs, String trxName)
 	{
 		super(ctx, rs, trxName);
-		m_ddl = createDDL();
 	}
 	
 	/**
