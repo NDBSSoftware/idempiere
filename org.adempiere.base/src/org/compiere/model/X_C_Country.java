@@ -31,7 +31,7 @@ public class X_C_Country extends PO implements I_C_Country, I_Persistent
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20221224L;
+	private static final long serialVersionUID = 20241226L;
 
     /** Standard Constructor */
     public X_C_Country (Properties ctx, int C_Country_ID, String trxName)
@@ -220,7 +220,7 @@ public class X_C_Country extends PO implements I_C_Country, I_Persistent
 	}
 
 	/** Set ISO Country Code.
-		@param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+		@param CountryCode Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
 	*/
 	public void setCountryCode (String CountryCode)
 	{
@@ -228,7 +228,7 @@ public class X_C_Country extends PO implements I_C_Country, I_Persistent
 	}
 
 	/** Get ISO Country Code.
-		@return Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1 - http://www.chemie.fu-berlin.de/diverse/doc/ISO_3166.html
+		@return Upper-case two-letter alphanumeric ISO Country code according to ISO 3166-1
 	  */
 	public String getCountryCode()
 	{
@@ -455,6 +455,22 @@ public class X_C_Country extends PO implements I_C_Country, I_Persistent
 		return false;
 	}
 
+	/** Set ISO Alpha-3 Code.
+		@param ISOCountryCodeAlpha3 ISO Alpha-3 country code - a three-letter code that represents a country name, which is usually more closely related to the country name
+	*/
+	public void setISOCountryCodeAlpha3 (String ISOCountryCodeAlpha3)
+	{
+		set_Value (COLUMNNAME_ISOCountryCodeAlpha3, ISOCountryCodeAlpha3);
+	}
+
+	/** Get ISO Alpha-3 Code.
+		@return ISO Alpha-3 country code - a three-letter code that represents a country name, which is usually more closely related to the country name
+	  */
+	public String getISOCountryCodeAlpha3()
+	{
+		return (String)get_Value(COLUMNNAME_ISOCountryCodeAlpha3);
+	}
+
 	/** Set Use Postcode Lookup.
 		@param IsPostcodeLookup Does this country have a post code web service
 	*/
@@ -540,6 +556,22 @@ public class X_C_Country extends PO implements I_C_Country, I_Persistent
 	public String getLookupUrl()
 	{
 		return (String)get_Value(COLUMNNAME_LookupUrl);
+	}
+
+	/** Set M49 Code.
+		@param M49Code Standard country codes for statistical use (M49) defined by the United Nations
+	*/
+	public void setM49Code (String M49Code)
+	{
+		set_Value (COLUMNNAME_M49Code, M49Code);
+	}
+
+	/** Get M49 Code.
+		@return Standard country codes for statistical use (M49) defined by the United Nations
+	  */
+	public String getM49Code()
+	{
+		return (String)get_Value(COLUMNNAME_M49Code);
 	}
 
 	/** Set Media Size.
