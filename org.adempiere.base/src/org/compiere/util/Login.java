@@ -1578,7 +1578,7 @@ public class Login
 		else 
 		{
 			boolean foundLockedAccount = false;
-			for (MUser user : usersAuthenticated)
+			for (MUser user : users)
 			{
 				if (user.isLocked())
 				{
@@ -1626,6 +1626,12 @@ public class Login
 				loginErrMsg = Msg.getMsg(m_ctx, "UserAccountLocked", new Object[] {app_user});				
 			}
 		}
+		
+		if (isSSOLogin)
+			Env.setContext(Env.getCtx(), Env.IS_SSO_LOGIN, true);
+		else
+			Env.setContext(Env.getCtx(), Env.IS_SSO_LOGIN, false);
+		
 		return retValue;
 	}
 
