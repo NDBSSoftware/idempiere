@@ -3105,6 +3105,7 @@ public class GridTable extends AbstractTableModel
 					m_rowLoadTimeout = true;
 					throw new AdempiereException(Msg.getMsg(Env.getCtx(), LOAD_TIMEOUT_ERROR_MESSAGE), e);
 				} else {
+					log.severe(e.getLocalizedMessage() + " -> " + m_SQL);
 					log.saveError(e.getLocalizedMessage(), e);
 					throw new DBException(e);
 				}
@@ -3218,7 +3219,8 @@ public class GridTable extends AbstractTableModel
 			}
 			catch (Exception e)
 			{
-				log.log(Level.SEVERE, "run", e);
+				if (! DBException.isTimeout(e))
+					throw new AdempiereException(e);
 			}
 			finally
 			{
