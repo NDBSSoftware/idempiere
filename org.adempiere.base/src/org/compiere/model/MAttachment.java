@@ -38,7 +38,6 @@ import org.compiere.tools.FileUtil;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
-import org.compiere.util.Msg;
 import org.compiere.util.Util;
 
 /**
@@ -56,9 +55,9 @@ import org.compiere.util.Util;
 public class MAttachment extends X_AD_Attachment
 {
 	/**
-	 * 
+	 * generated serial id
 	 */
-	private static final long serialVersionUID = 5422581050563711060L;
+	private static final long serialVersionUID = 5615231734722570658L;
 
 	/**
 	 * @param ctx
@@ -210,31 +209,7 @@ public class MAttachment extends X_AD_Attachment
 	/** string replaces the attachment root in stored xml file
 	 * to allow the changing of the attachment root. */
 	public final String ATTACHMENT_FOLDER_PLACEHOLDER = "%ATTACHMENT_FOLDER%";
-
-	/* Attachment files can be read, but not written/deleted */
-	private Boolean isReadOnly = null;
-
-	/**
-	 * If the related record is on System and the user is operating on Tenant, the attachment is read-only
-	 * @return
-	 */
-	public boolean isReadOnly() {
-		if (isReadOnly == null) {
-			isReadOnly = true;
-			MTable table = MTable.get(getAD_Table_ID());
-			if (table != null) {
-				PO po = null;
-				if (table.isUUIDKeyTable())
-					po = table.getPOByUU(getRecord_UU(), get_TrxName());
-				else
-					po = table.getPO(getRecord_ID(), get_TrxName());
-				if (po != null && ! po.is_new() && po.getAD_Client_ID() == Env.getAD_Client_ID(getCtx()))
-					isReadOnly = false;
-			}
-		}
-		return isReadOnly;
-	}
-
+	
 	/**
 	 * Initialize storage provider
 	 * @param ctx
@@ -452,8 +427,6 @@ public class MAttachment extends X_AD_Attachment
 	 * @return true if deleted
 	 */
 	public boolean deleteEntry(int index) {
-		if (isReadOnly())
-			throw new AdempiereException(Msg.getMsg(getCtx(), "R/O"));
 		if (m_items == null)
 			loadLOBData();
 		if (index >= 0 && index < m_items.size()) {
@@ -597,8 +570,6 @@ public class MAttachment extends X_AD_Attachment
 	@Override
 	protected boolean beforeSave (boolean newRecord)
 	{
-		if (isReadOnly())
-			throw new AdempiereException(Msg.getMsg(getCtx(), "R/O"));
 		if (Util.isEmpty(getTitle()))
 			setTitle(NONE);
 		if (getRecord_ID() > 0 && getAD_Table_ID() > 0 && Util.isEmpty(getRecord_UU())) {
@@ -609,13 +580,6 @@ public class MAttachment extends X_AD_Attachment
 		}
 		return saveLOBData();		//	save in BinaryData
 	}	//	beforeSave
-
-	@Override
-	protected boolean beforeDelete() {
-		if (isReadOnly())
-			throw new AdempiereException(Msg.getMsg(getCtx(), "R/O"));
-		return true;
-	}
 
 	/**
 	 * 	Ask storage provider to remove attachment content
