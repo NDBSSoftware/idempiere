@@ -115,7 +115,6 @@
         <setEntry value="com.sun.xml.fastinfoset.FastInfoset*2.0.0@default:default"/>
         <setEntry value="com.sun.xml.messaging.saaj.impl@default:default"/>
         <setEntry value="com.sun.xml.stream.buffer.streambuffer@default:default"/>
-        <setEntry value="com.sun.xml.ws.jaxws-rt@default:default"/>
         <setEntry value="com.sun.xml.ws.policy@default:default"/>
         <setEntry value="com.zaxxer.HikariCP@default:default"/>
         <setEntry value="groovy-console@default:false"/>
@@ -322,7 +321,6 @@
         <setEntry value="org.glassfish.pfl.pfl-tf@default:default"/>
         <setEntry value="org.hamcrest.core@default:default"/>
         <setEntry value="org.junit@default:default"/>
-        <setEntry value="org.jvnet.mimepull@default:default"/>
         <setEntry value="org.jvnet.staxex.stax-ex@default:default"/>
         <setEntry value="org.krysalis.barcode4j@default:default"/>
         <setEntry value="org.mortbay.jasper.apache-el@default:true"/>
