@@ -1,5 +1,5 @@
 -- IDEMPIERE-6650 Performance - Implement support for using the uuid postgres datatype (FHCA-7074)
-SELECT register_migration_script('202510101902_IDEMPIERE-6650-uuid.sql') FROM dual;
+SELECT register_migration_script('202510101802_IDEMPIERE-6650-uuid.sql') FROM dual;
 
 -- set as UUID all _UU columns that were defined previously as String (for example by 2Packs)
 UPDATE ad_column

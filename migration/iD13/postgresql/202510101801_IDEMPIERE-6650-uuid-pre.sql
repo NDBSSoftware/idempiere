@@ -1,6 +1,6 @@
 -- IDEMPIERE-6650 Performance - Implement support for using the uuid postgres datatype (FHCA-7074)
 -- drop views that don't allow the UUIDs to be converted - they'll be recreated in the post script
-SELECT register_migration_script('202510101901_IDEMPIERE-6650-uuid-pre.sql') FROM dual;
+SELECT register_migration_script('202510101801_IDEMPIERE-6650-uuid-pre.sql') FROM dual;
 
 DROP VIEW rv_unprocessed;
 

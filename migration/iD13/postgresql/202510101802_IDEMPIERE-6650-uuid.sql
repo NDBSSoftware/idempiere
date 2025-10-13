@@ -2,7 +2,7 @@
 -- pl/pgsql anonymous block that converts ALL UUID columns from varchar(36) to native postgresql UUID datatype
 -- this script can be executed again and again when needed, it just touches the columns not converted
 -- in case of failure you need to evaluate which actions to take before restarting it - for example drop some view and recreate it after
-SELECT register_migration_script('202510101902_IDEMPIERE-6650-uuid.sql') FROM dual;
+SELECT register_migration_script('202510101802_IDEMPIERE-6650-uuid.sql') FROM dual;
 
 -- set as UUID all _UU columns that were defined previously as String (for example by 2Packs)
 UPDATE ad_column
