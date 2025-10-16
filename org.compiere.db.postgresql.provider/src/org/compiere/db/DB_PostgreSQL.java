@@ -213,7 +213,7 @@ public class DB_PostgreSQL implements AdempiereDatabase
 			.append(connection.getDbHost())
 			.append(":").append(connection.getDbPort())
 			.append("/").append(connection.getDbName())
-			.append("?encoding=UNICODE&ApplicationName=iDempiere&tcpKeepAlive=true");
+			.append("?encoding=UNICODE&ApplicationName=iDempiere&stringtype=unspecified&tcpKeepAlive=true");
 
 		String urlParameters = SystemProperties.getPostgresqlURLParameters();
 	    if (!Util.isEmpty(urlParameters)) {
@@ -1285,7 +1285,12 @@ public class DB_PostgreSQL implements AdempiereDatabase
 	public String getTimestampWithTimezoneDataType() {
 		return "TIMESTAMP WITH TIME ZONE";
 	}
-	
+
+	@Override
+	public String getUUIDDataType() {
+		return "UUID";
+	}
+
 	@Override
 	public String getSQLDDL(MColumn column) {				
 		StringBuilder sql = new StringBuilder ().append(column.getColumnName())
