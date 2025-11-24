@@ -225,7 +225,7 @@ public class MTable extends X_AD_Table implements ImmutablePOSupport
 		if (cache != null)
 		{
 			IModelFactory service = cache.getService();
-			if (service != null && service.getClass(tableName) != null)
+			if (service != null)
 			{
 				Class<?> clazz = service.getClass(tableName);
 				if (clazz != null)
@@ -239,7 +239,7 @@ public class MTable extends X_AD_Table implements ImmutablePOSupport
 			return null;
 		for(IServiceReferenceHolder<IModelFactory> factory : factoryList) {
 			IModelFactory service = factory.getService();
-			if (service != null && service.getClass(tableName) != null) {
+			if (service != null) {
 				Class<?> clazz = service.getClass(tableName);
 				if (clazz != null)
 				{
@@ -628,20 +628,14 @@ public class MTable extends X_AD_Table implements ImmutablePOSupport
 	}	//	getPO
 
 	/**
-	 * 	Get PO Instance for uuid table
+	 * 	Get PO Instance using uuid string contructor
 	 *	@param uuid record uuid. not null or empty string.
 	 *	@param trxName
-	 *	@return PO for Record_ID or null
+	 *	@return PO for uuid or null
 	 */
 	public PO getUUIDPOInstance (String uuid, String trxName)
 	{
 		String tableName = getTableName();
-		if (!isUUIDKeyTable())
-		{
-			log.log(Level.WARNING, "Not UUID Key " + tableName);
-			return null;
-		}
-
 		PO po = null;
 		IServiceReferenceHolder<IModelFactory> cache = s_modelFactoryCache.get(tableName);
 		if (cache != null)
@@ -750,10 +744,22 @@ public class MTable extends X_AD_Table implements ImmutablePOSupport
 		if (isUUIDKeyTable())
 			return getUUIDPOInstance(uuID, trxName);
 		
-		PO po = getPO(0, trxName);
-		po.loadByUU(uuID, trxName);
-
-		return po;
+		// create new record
+		if (PO.UUID_NEW_RECORD.equals(uuID))
+		{
+			PO po = getUUIDPOInstance(uuID, trxName);
+			// try id contructor if uuid constructor not found
+			if (po == null)
+				po = getPO(0, trxName);
+			return po;
+		}
+		
+		// not uuid key table and not create new record, fall backs to load by where clause
+		StringBuilder whereClause = new StringBuilder()
+			.append(PO.getUUIDColumnName(getTableName()))
+			.append("=")
+			.append(DB.TO_STRING(uuID));
+		return getPO(whereClause.toString(), trxName);
 	} // getPOByUU
 
 	/**
