@@ -853,8 +853,8 @@ public final class DB
 			pstmt.setClob(index, (Clob) param);
 		else if (param.getClass().getName().equals("oracle.sql.BLOB"))
 			pstmt.setObject(index, param);
-		else
-			throw new DBException("Unknown parameter type "+index+" - "+param);
+		else //let jdbc driver handle the rest of types
+			pstmt.setObject(index, param);
 	}
 
 	/**
