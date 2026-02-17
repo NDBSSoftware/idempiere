@@ -44,6 +44,8 @@ public interface IAttachmentLazyDataSource {
      * Get size of attachment entry
      * @return size
      */
-    long getSize();
+    default long getSize() {
+    	return getData().length;
+    }
 
 }
