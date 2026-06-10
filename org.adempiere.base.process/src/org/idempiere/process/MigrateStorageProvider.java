@@ -264,12 +264,7 @@ public class MigrateStorageProvider extends SvrProcess {
 				if (! (oldProviderId == 0 || MStorageProvider.METHOD_Database.equals(oldProvider.getMethod()))) { // DB method doesn't require delete
 					IAttachmentStore oldStore = oldProvider.getAttachmentStore();
 					// delete file on old storage
-					try {
-						attachment.set_Attribute(MAttachment.MIGRATE_STORAGE_DELETING_OLD_PROVIDER, "Y");
-						oldStore.delete(attachment, oldProvider);
-					} finally {
-						attachment.set_Attribute(MAttachment.MIGRATE_STORAGE_DELETING_OLD_PROVIDER, null);
-					}
+					oldStore.delete(attachment, oldProvider);
 					commitEx();
 				}
 			}

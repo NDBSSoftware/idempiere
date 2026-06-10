@@ -74,9 +74,4 @@ public class AttachmentFileLazyDataSource implements IAttachmentLazyDataSource {
 		return dataEntry;
 	}
 
-    @Override
-    public long getSize() {
-        return m_file.length();
-    }
-
 }

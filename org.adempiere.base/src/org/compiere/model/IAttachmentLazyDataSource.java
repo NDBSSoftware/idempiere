@@ -40,10 +40,4 @@ public interface IAttachmentLazyDataSource {
 	 */
 	public byte[] getData();
 
-    /**
-     * Get size of attachment entry
-     * @return size
-     */
-    long getSize();
-
 }

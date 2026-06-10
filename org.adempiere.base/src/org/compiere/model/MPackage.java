@@ -395,6 +395,10 @@ public class MPackage extends X_M_Package
 									|| attachment.getEntry(i).getName().endsWith("_cod"))
 								attachment.deleteEntry(i);
 						}
+						if (attachment.getTitle() != null)
+							attachment.setTitle(attachment.getTitle());
+						else
+							attachment.setTitle(MAttachment.ZIP);
 						attachment.saveEx();
 					}
 				}
