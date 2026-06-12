@@ -6,7 +6,7 @@ UPDATE AD_IndexColumn SET AD_Column_ID=215842,Updated=TO_TIMESTAMP('2026-04-28 2
 ;
 
 -- Apr 28, 2026, 11:42:17 PM CEST
-DROP INDEX ad_attachment_record
+DROP INDEX IF EXISTS ad_attachment_record
 ;
 
 -- Apr 28, 2026, 11:42:18 PM CEST
@@ -18,7 +18,7 @@ INSERT INTO AD_IndexColumn (AD_Client_ID,AD_Org_ID,AD_IndexColumn_ID,AD_IndexCol
 ;
 
 -- Apr 28, 2026, 11:43:31 PM CEST
-DROP INDEX AD_PostIt_Record_ID_AD_Table_ID
+DROP INDEX IF EXISTS AD_PostIt_Record_ID_AD_Table_ID
 ;
 
 -- Apr 28, 2026, 11:43:31 PM CEST
@@ -42,7 +42,7 @@ UPDATE AD_IndexColumn SET SeqNo=20,Updated=TO_TIMESTAMP('2026-04-28 23:44:36','Y
 ;
 
 -- Apr 28, 2026, 11:44:41 PM CEST
-DROP INDEX cm_chat_record
+DROP INDEX IF EXISTS cm_chat_record
 ;
 
 -- Apr 28, 2026, 11:44:41 PM CEST
